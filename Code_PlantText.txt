@@ -1,0 +1,53 @@
+@startuml
+
+Mastermind *-down-> "2" Player
+Mastermind *-down-> Board
+Mastermind *-down-> Turn
+
+Board o-down-> "0..30" Score
+Board o-down-> "0..5" Code
+Board o-down-> "0..5" Attempt
+Board o-down-> "0..5" Feedback
+
+Turn -down-> "2" Player
+
+Player -down-> Board
+Player o-down-> "0..5" Piece
+
+Player <|-down- Encoder
+Player <|-down- Decoder
+
+Action <|-down- PutActionFeedback
+Action <|-down- PutActionAttempt
+Action <|-down- PutActionCode
+Action <|-down- PutActionScore
+
+Encoder .down.> "5" PutActionCode 
+Encoder .down.> "5" PutActionFeedback
+
+Decoder .down.> "30" PutActionScore
+Decoder .down.> "5" PutActionAttempt
+
+Action .down.> Piece
+Action .down.> Score
+Action .down.> Code
+Action .down.> Attempt
+Action .down.> Feedback
+
+Piece *-down-> Color
+Color <|-down- Red
+Color <|-down- Green
+Color <|-down- Yellow
+Color <|-down- Pink
+Color <|-down- Brown
+Color <|-down- Purple
+Color <|-down- Black
+Color <|-down- White
+Color <|-down- Gray
+Color <|-down- Orange
+
+Player o-down-> Goal
+Goal <|-down- ScoreMax
+Goal <|-down- ScoreMin
+
+@enduml
